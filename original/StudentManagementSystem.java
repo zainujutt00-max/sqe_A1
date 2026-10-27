@@ -30,6 +30,10 @@ public class StudentManagementSystem {
     private static int unusedCounter = 999;
 
     public static void main(String[] args) {
+        if (args.length == 2 && "--bug-demo".equals(args[0])) {
+            demonstrateBug(args[1]);
+            return;
+        }
         System.out.println("Starting Student Management System...");
 
         // Add sample students
@@ -52,6 +56,47 @@ public class StudentManagementSystem {
 
         // Weak exception handling demonstration
         riskyOperation(null);
+    }
+
+    // Assignment-only defects: invoke individually with --bug-demo <case>.
+    public static void demonstrateBug(String bug) {
+        switch (bug) {
+            case "null":
+                System.out.println(nullableStudentName().length());
+                break;
+            case "bounds":
+                int[] marks = {85, 92, 38};
+                System.out.println(marks[marks.length]);
+                break;
+            case "divide":
+                System.out.println(averageWholeMarks(100, 0));
+                break;
+            case "string":
+                System.out.println("Expected true, actual: " + sameStudentId(new String("S101")));
+                break;
+            case "self-assignment":
+                int currentMarks = 40;
+                currentMarks = currentMarks;
+                System.out.println("Expected updated marks 90, actual: " + currentMarks);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown bug demo: " + bug);
+        }
+    }
+
+    private static String nullableStudentName() {
+        return null;
+    }
+
+    public static int averageWholeMarks(int total, int studentCount) {
+        if (studentCount == 0) {
+            return total / studentCount;
+        }
+        return total / studentCount;
+    }
+
+    public static boolean sameStudentId(String id) {
+        return id == "S101";
     }
 
     // Function 1: Add student (Contains unused variables and magic numbers)
