@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.*
 
 /**
  * Student Management System - Original Version (Intentional Code Quality Issues)
@@ -42,7 +42,7 @@ public class StudentManagementSystem {
         displayStudentInfo();
 
         // Calculate and display average
-        Calc_Avg();
+        Calc_Avgs{};
 
         // Find highest marks
         find_Highest();
